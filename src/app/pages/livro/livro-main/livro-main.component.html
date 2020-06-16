@@ -1,0 +1,92 @@
+<page-container [titulo]="tituloPagina">
+  <div class="p-grid">
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <button pButton type="button" icon="pi pi-plus" label="Inserir" class="ui-button-raised"
+        (click)="prepararIncersaoItem()"></button>
+    </div>
+
+    <div class="p-col-12 p-md-12 p-lg-12"></div>
+    <p-table [columns]="cols" [value]="livros" resizableColumns="true">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of cols">
+            {{col.header}}
+          </th>
+          <th style="width:15%">Ações</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr [pSelectableRow]="rowData">
+          <td *ngFor="let col of cols" class="ui-resizable-column" [ngSwitch]="col.field">
+            <span *ngSwitchCase="'titulo'">{{rowData[col.field]}}</span>
+            <span *ngSwitchCase="'autor'">{{rowData[col.field]}}</span>
+            <span *ngSwitchCase="'editora'">{{rowData[col.field]}}</span>
+            <span *ngSwitchCase="'area'">{{rowData[col.field]}}</span>
+          </td>
+          <td style="width:15%">
+            <button pButton type="button" icon="pi pi-pencil" class="ui-button-raised ui-button-warning"
+              (click)="editarLivro(rowData)"></button>
+            <button pButton type="button" icon="pi pi-trash" class="ui-button-raised ui-button-danger"
+              (click)="excluirLivro(rowData)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            Nada encontrado aqui!
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+  <!-- Diálogo de cadastro de itens da tabela -->
+
+
+  <p-dialog [header]="headerModal" [(visible)]="displayDialog" modal="modal" [responsive]="true" showEffect="fade"
+    [style]="{width: '20vw'}" [baseZIndex]="10000">
+    <form autocomplete="off" #livroForm="ngForm" id="livroForm" [ngFormOptions]="{updateOn:'blur'}">
+      <div class="p-grid">
+        <div class="p-col-12 p-md-12 p-lg-12 ui-fluid">
+          <label>Título: </label>
+          <input pInputText type="text" name="titulo" [(ngModel)]="livro.titulo" #titulo="ngModel" required
+            minlength="3">
+          <validate [control]="titulo" error="required" text="O título deve ser informado"></validate>
+          <validate [control]="titulo" error="minlength" text="O mínimo é 3 caracteres"></validate>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12 ui-fluid">
+          <label>Autor: </label>
+          <input pInputText type="text" name="autor" [(ngModel)]="livro.autor" #autor="ngModel" required minlength="3">
+          <validate [control]="autor" error="required" text="O autor do livro deve ser informado"></validate>
+          <validate [control]="autor" error="minlength" text="O mínimo é 3 caracteres"></validate>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-12 ui-fluid">
+          <label>Editora: </label>
+          <input pInputText type="text" name="editora" [(ngModel)]="livro.editora" #editora="ngModel" required
+            minlength="3">
+          <validate [control]="editora" error="required" text="A editora do livro deve ser informado"></validate>
+          <validate [control]="editora" error="minlength" text="O mínimo é 3 caracteres"></validate>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-12 ui-fluid">
+          <label>Área: </label>
+          <input pInputText type="text" name="area" [(ngModel)]="livro.area" #area="ngModel" required minlength="3">
+          <validate [control]="area" error="required" text="A área do livro deve ser informado"></validate>
+          <validate [control]="area" error="minlength" text="O mínimo é 3 caracteres"></validate>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-12" dir="rtl">
+          <button type="button" pButton icon="pi pi-check" class="ui-button-raised" [disabled]="livroForm.form.invalid"
+            (click)="salvarLivro()" label="Confirmar"></button>
+          <button type="button" pButton icon="pi pi-times" class="ui-button-raised ui-button-warning"
+            (click)="cancelar()" label="Cancelar"></button>
+        </div>
+      </div>
+    </form>
+  </p-dialog>
+</page-container>

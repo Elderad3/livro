@@ -1,0 +1,18 @@
+{
+  "livro": [
+    {
+      "id": 1,
+      "titulo": "Manual de contabilidade Societária",
+      "autor": "Eliseu Martins",
+      "editora": "Gem",
+      "area": "Contabilidade"
+    },
+    {
+      "id": 2,
+      "titulo": "Java Como Programar",
+      "autor": "Deitel",
+      "editora": "Pearson",
+      "area": "Programação"
+    }
+  ]
+}
