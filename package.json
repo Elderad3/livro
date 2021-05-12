@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
     "@guiseek/ofx2json": "^1.0.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "primeflex": "^1.0.0",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.6",
